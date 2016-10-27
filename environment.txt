@@ -1,0 +1,45 @@
+[project_path] = C:\Pessoal\Projetos\sample-rest-python
+[project_folder] =  sources
+[project_name] = backend
+[project_api_name] = api
+[mysqlclient_wheel_path] = "C:\Drivers\mysqlclient-1.3.8-cp35-cp35m-win32.whl"
+[project_virtual_environment] = env
+
+--Preparo do ambiente
+
+python -m pip install --upgrade pip
+pip install virtualenv
+cd [project_path]
+virtualenv [project_virtual_environment]
+
+--Ativacao do ambiente
+env\scripts\activate
+
+--Instalacao do django
+pip install django
+pip install djangorestframework
+
+--Instalacao do cors
+pip install django-cors-headers
+
+--Instalacao do wheel do mysqlclient
+pip instal [mysqlclient_wheel_path]
+
+--Criacao do projeto
+mkdir [project_folder]
+cd [project_folder]
+django-admin.py startproject [project_name] .
+cd [project_name]
+django-admin.py startapp [project_api_name]
+
+--Atualizacao do banco de dados
+python manage.py makemigrations
+python manage.py migrate
+
+--Inicializacao do servidor
+python manage.py runserver
+
+References:
+http://docs.python-guide.org/en/latest/dev/virtualenvs/
+http://django-mongodb-engine.readthedocs.io/en/latest/topics/setup.html
+http://www.lfd.uci.edu/~gohlke/pythonlibs/#mysqlclient
